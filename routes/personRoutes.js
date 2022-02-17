@@ -17,15 +17,22 @@ router.post('/', async(req, res) => {
     }
 
     try {
-        
         await Person.create(person)
-
         res.status(201).json({ message: 'Pessoa inserida com sucesso!' })
-
     } catch (error) {
         res.status(500).json({ error: error })
     }
 
+})
+
+// Read - leitura de dados
+router.get('/', async(req, res) => {
+    try {
+        const people = await Person.find()
+        res.status(200).json(people)
+    }catch (error) {
+        res.status(500).json({ error: error })
+    }
 })
 
 module.exports = router
